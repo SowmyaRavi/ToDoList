@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ToDo List</title>
+	<style type="text/css">
+
+		body{
+			margin: 0;
+		}
+		header{
+			text-align: center;
+			margin: 10px 10px 0px 10px ;
+			font-size: 20px;
+			background-color: green;
+			padding: 5px 10px 10px;
+			display: block;
+		}
+		#myInput{
+			width: 400px;
+			height: 25px;
+			font-size: 15px;
+			margin: 0;
+		}
+		.addBtn{
+
+			background-color: #bbb;
+			width: 100px;
+			padding: 3px 40px;
+			text-align: center;
+			font-size: 20px;
+
+		}
+		.addBtn:hover{
+			background-color: #d9d9d9;
+
+		}
+		
+		ul {
+			margin: 0;
+			padding:0;
+		}
+		ul li{
+			cursor: pointer;
+			margin: 0 10px 0  ;
+			padding: 10px 10px 10px 25px;
+			background-color: #eee;
+			font-size: 20px;
+			position: relative;
+		}
+		ul li:nth-child(odd){
+			background-color: #f9f9f9;
+		}
+
+		ul li.checked {
+            background: #888;
+            color: #fff;
+            text-decoration: line-through;
+        }
+
+        .close{
+        	position: absolute;
+        	right: 0;
+        	bottom: 0;
+        	padding: 12px 6px;
+        }
+
+        ul li.checked::before {
+        	content: '';
+    		position: absolute;
+    		border-color: #fff;
+    		border-style: solid;
+    		border-width: 0 2px 2px 0;
+    		top: 10px;
+    		left: 5px;
+    		transform: rotate(45deg);
+    		height: 15px;
+    		width: 7px;
+    	}
+
+</style>
+</head>
+<body>
+<header>
+ <h1>My To Do List</h1>
+ <input type = "text" id="myInput" placeholder="Title.....">
+  <span onclick="newElement()" class="addBtn">Add</span>
+ </header>
+ <ul id = "muUl">
+	<li class= "checked"> Pay Bills</li>
+ </ul>
+ 
+
+<script type="text/javascript">
+
+// create close button for all list item
+
+	var myNodeList = document.getElementsByTagName("LI");
+	var i;
+	for(i =0; i< myNodeList.length ; i++){
+	 	var span = document.createElement("SPAN");
+	 	var txt = document.createTextNode("\u00D7");
+	 	span.className = "close";
+	 	span.appendChild(txt);
+	 	myNodeList[i].appendChild(span);
+	}
+
+    //click on close hides the current list item
+
+    var close = document.getElementsByClassName("close");
+    var i;
+    for(i =0; i<close.length; i++){
+    	close[i].onclick = function(){
+    		var div = this.parentElement;
+    		div.style.display = "none";
+    	}
+    }
+    // Add a "checked" symbol when clicking on a list item
+	var list = document.querySelector('ul');
+	list.addEventListener('click', function(ev) {
+  	if (ev.target.tagName === 'LI') {
+    	ev.target.classList.toggle('checked');
+    }
+});
+   
+   //add a new element to list
+	function newElement(){
+		var li = document.createElement("li");
+		var inputValue = document.getElementById('myInput').value;
+		var t = document.createTextNode(inputValue);
+		li.appendChild(t);
+		if(inputValue == ''){
+			alert("please input something");
+		}else{
+			document.getElementById('muUl').appendChild(li);
+		}
+		document.getElementById('myInput').value = ' ';
+
+
+     var span = document.createElement("SPAN");
+	 var txt = document.createTextNode("\u00D7");
+	 span.className = "close";
+	 span.appendChild(txt);
+	 li.appendChild(span);
+
+	 for(i=0;i<close.length;i++){
+	 	close[i].onclick = function(){
+	 		var div = this.parentElement;
+	 		div.style.display = "none";
+	 	}
+	 }
+	}
+
+</script>
+</body>
+</html>
